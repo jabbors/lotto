@@ -1,0 +1,16 @@
+{
+	"name": "vuejs",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Vue.volar"
+			]
+		}
+	},
+	"forwardPorts": [
+		8080
+	]
+}
