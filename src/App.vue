@@ -1,5 +1,6 @@
 <template>
   <header class="header">
+    Lotto
     <button class="hamburger" @click="toggleMenu">☰</button>
 
     <nav v-if="menuOpen" class="menu">
