@@ -3,9 +3,13 @@
     <button class="hamburger" @click="toggleMenu">☰</button>
 
     <nav v-if="menuOpen" class="menu">
-      <router-link to="/" @click="closeMenu">Home</router-link>
-      <router-link to="/about" @click="closeMenu">About</router-link>
-      <router-link to="/contact" @click="closeMenu">Contact</router-link>
+      <router-link to="/" @click="closeMenu">Hem</router-link>
+      <router-link to="/rows" @click="closeMenu">Rader</router-link>
+      <router-link to="/numbers" @click="closeMenu">Nummerfördelning</router-link>
+      <router-link to="/top10" @click="closeMenu">Top 10</router-link>
+      <router-link to="/stats" @click="closeMenu">Statistik</router-link>
+      <router-link to="/search" @click="closeMenu">Sök</router-link>
+      <router-link to="/generate" @click="closeMenu">Generera</router-link>
     </nav>
   </header>
 
