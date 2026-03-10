@@ -1,8 +1,6 @@
 <template>
   <header class="header">
-    Lotto
-    <button class="hamburger" @click="toggleMenu">☰</button>
-
+    <button class="hamburger" @click="toggleMenu" style="color:white">☰</button>
     <nav v-if="menuOpen" class="menu">
       <router-link to="/" @click="closeMenu">Hem</router-link>
       <router-link to="/rows" @click="closeMenu">Rader</router-link>
@@ -12,6 +10,7 @@
       <router-link to="/search" @click="closeMenu">Sök</router-link>
       <router-link to="/generate" @click="closeMenu">Generera</router-link>
     </nav>
+    <span style="color:white">Lotto</span>
   </header>
 
   <main>
@@ -54,7 +53,7 @@ export default {
 .header {
   position: relative;
   padding: 1rem;
-  background: #f5f5f5;
+  background: #c30f00;
 }
 
 .hamburger {
