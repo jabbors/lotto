@@ -73,7 +73,7 @@ export default {
     }
     onBeforeMount(fetchData)
 
-    const startYear = 2000
+    const startYear = 1987
     const currentYear = new Date().getFullYear()
 
     const years = computed(() => Array.from(
