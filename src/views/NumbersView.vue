@@ -5,14 +5,15 @@
         <option v-for="year in years" :key=year :value="year">{{year}}</option>
     </select>
   </form>
-  <div v-if="dataAllYears">
+  <div class="container-2-columns">
+  <div v-if="dataAllYears" class="left-align">
     <p>Alla</p>
-    <p>{{ dataAllYears.average}}</p>
+    <p>Medeltal: {{ dataAllYears.average}}</p>
     <table>
       <thead>
         <tr>
-          <th>Nummer</th>
-          <th>#</th>
+          <th width="60px">Nummer</th>
+          <th width="30px">#</th>
         </tr>
       </thead>
       <tbody>
@@ -23,14 +24,14 @@
       </tbody>
     </table>
   </div>
-  <div v-if="dataYear">
+  <div v-if="dataYear" class="left-align">
     <p>{{ yearSelected}}</p>
-    <p>{{ dataYear.average}}</p>
+    <p>Medeltal: {{ dataYear.average}}</p>
     <table>
       <thead>
         <tr>
-          <th>Nummer</th>
-          <th>#</th>
+          <th width="60px">Nummer</th>
+          <th width="30px">#</th>
         </tr>
       </thead>
       <tbody>
@@ -40,6 +41,7 @@
         </tr>
       </tbody>
     </table>
+  </div>
   </div>
 </template>
 

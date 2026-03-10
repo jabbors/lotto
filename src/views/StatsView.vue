@@ -2,9 +2,10 @@
   <h1>Statistik</h1>
   <p>Statistiken är beräknad på alla rader från och med 1987.</p>
   <p><b>Vinster</b></p>
-  <p>Om man alltid hade lagt en rad me de sju mest förekommande nummren (dvs <span v-if="topSevenNumbers">{{ topSevenNumbers }}</span>) skulle man genom tiderna ha haft:</p>
-  <div v-if="matches.length">
-    <table v-for="match in matches" :key=match.category>
+  <p>Om man alltid hade lagt en rad me de sju mest förekommande nummren (dvs <span v-if="topSevenNumbers">{{ topSevenNumbers.toString() }}</span>) skulle man genom tiderna ha haft:</p>
+  <div v-if="matches.length" class="container-5-columns">
+    <div v-for="match in matches" :key=match.category class="left-align">
+    <table>
       <thead>
         <tr><td>{{ match.category }} rätt</td></tr>
         <tr><td>{{ match.total }} st</td></tr>
@@ -14,11 +15,13 @@
       </tbody>
   </table>
   </div>
+  </div>
+  <div class="clear"></div>
   <p><b>Datumrader</b></p>
   <p>I tabellen nedan har jag listat hur många av de dragna raderna som bara innehåller nummror mindre än eller lika med 31 samt hur många rader som innehåller minst ett nummer större än 31.</p>
   <table v-if="dateStats">
     <thead>
-        <tr><td>Beskrivning</td><td>Dragna</td><td>%</td></tr>
+        <tr><td width="80px">Beskrivning</td><td width="80px">Dragna</td><td width="60px">%</td></tr>
     </thead>
     <tbody>
         <tr><td>&lt;= 31</td><td>{{ dateStats.lessThanEqual.total }}</td><td>{{ dateStats.lessThanEqual.percentage }}</td></tr>
@@ -29,7 +32,7 @@
   <p>I tabellen nedan har jag listat hur många unika kombinationer av 7, 6, 5, 4, och 3 nummror man kan skapa bland 40 nummror. Dessutom har jag listat hur många av kombinationerna som redan har förekommit om man för varje rad som dragits sedan 1987 skapar unika kombinationer av 7, 6, 5, 4, och 3 nummror.</p>
   <table v-if="combinationStats">
     <thead>
-        <tr><td>Antal nummer</td><td>Unika</td><td>Dragna</td><td>%</td></tr>
+        <tr><td width="140px">Antal nummer</td><td width="80px">Unika</td><td width="80px">Dragna</td><td width="60px">%</td></tr>
     </thead>
     <tbody>
         <tr v-for="combination in combinationStats" :key=combination.numbers>
@@ -41,27 +44,27 @@
     </tbody>
   </table>
   <p><b>Alla rader och vinster</b></p>
-  <p>Det finns totalt 18643560 st unika rader. Då en rad kostar 1,0 € skulle det kosta 18643560 € att gardera alla rader. Om man en godtycklig vecka garderade alla rader skulle det ge dig följande vinsfördelning:</p>
+  <p>Det finns totalt 18643560 st unika rader. Då en rad kostar 1,0 € skulle det kosta 18643560 € att gardera alla rader. Om man en godtycklig vecka garderade alla rader skulle det ge dig följande vinstfördelning:</p>
   <table>
     <tbody>
         <tr>
-            <td>7 rätt</td>
-            <td>1 st</td>
+            <th width="80px">7 rätt</th>
+            <td wdith="100px">1 st</td>
         </tr>
         <tr>
-            <td>6+1 rätt</td>
+            <th>6+1 rätt</th>
             <td>21 st</td>
         </tr>
         <tr>
-            <td>6 rätt</td>
+            <th>6 rätt</th>
             <td>203 st</td>
         </tr>
         <tr>
-            <td>5 rätt</td>
+            <th>5 rätt</th>
             <td>10416 st</td>
         </tr>
         <tr>
-            <td>4 rätt</td>
+            <th>4 rätt</th>
             <td>173600 st</td>
         </tr>
     </tbody>
@@ -83,7 +86,7 @@ export default {
       // find intersection between sets
       var wins = {4:[], 5:[], 6:[], 61:[], 7:[]}
       for (const row of rows.rounds) {
-        var weekYear = row.round+'/'+row.date.substring(0, 4);
+        var weekYear = row.date.substring(0, 4)+'/'+row.round
         var rowSet = new Set(row.numbers)
         var match = rowSet.intersection(topSevenNumbersSet)
         if (match.size < 4) continue

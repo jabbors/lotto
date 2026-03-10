@@ -8,10 +8,11 @@
     </select>
     <button type="button" @click="clickRows">Generera</button>
   </form>
+  <p></p>
   <div v-if="rowsGenerated.length">
     <table>
       <tbody>
-        <tr v-for="row in rowsGenerated" :key=row><td>{{ row }}</td></tr>
+        <tr v-for="(row, i) in rowsGenerated" :key=row><th width="30">{{ i+1 }}</th><td>{{ row.toString() }}</td></tr>
       </tbody>
     </table>
   </div>
@@ -22,17 +23,28 @@
         <option v-for="year in years" :key=year :value="year">{{year}}</option>
     </select>
   </form>
+  <p></p>
   <table v-if="data">
     <thead>
         <tr>
-            <th>Omgång</th>
-            <th>Vinster</th>
+            <th width="60">Omgång</th>
+            <th width="30">7</th>
+            <th width="30">6+1</th>
+            <th width="30">6</th>
+            <th width="30">5</th>
+            <th width="30">4</th>
+            <th width="30">3+1</th>
         </tr>
     </thead>
     <tbody>
         <tr v-for="round in data.rounds" :key=round.round>
             <td>{{ round.round }}</td>
-            <td>{{ round.winnings }}</td>
+            <td>{{ round.winnings[7] }}</td>
+            <td>{{ round.winnings['6p1'] }}</td>
+            <td>{{ round.winnings[6] }}</td>
+            <td>{{ round.winnings[5] }}</td>
+            <td>{{ round.winnings[4] }}</td>
+            <td>{{ round.winnings['3p1'] }}</td>
         </tr>
     </tbody>
   </table>

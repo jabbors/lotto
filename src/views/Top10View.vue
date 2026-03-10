@@ -1,14 +1,15 @@
 <template>
   <h1>Top 10</h1>
   <p><b>10 mest förekommande nummer</b></p>
-  <div v-if="dataAllYears">
+  <div class="container-2-columns">
+  <div v-if="dataAllYears" class="left-align">
     <p>Alla</p>
-    <p>{{ dataAllYears.average}}</p>
+    <p>Medeltal: {{ dataAllYears.average}}</p>
     <table>
       <thead>
         <tr>
-          <th>Nummer</th>
-          <th>#</th>
+          <th width="60px">Nummer</th>
+          <th width="30px">#</th>
         </tr>
       </thead>
       <tbody>
@@ -19,14 +20,14 @@
       </tbody>
     </table>
   </div>
-  <div v-if="dataYear">
+  <div v-if="dataYear" class="left-align">
     <p>{{ currentYear }}</p>
-    <p>{{ dataYear.average}}</p>
+    <p>Medeltal: {{ dataYear.average}}</p>
     <table>
       <thead>
         <tr>
-          <th>Nummer</th>
-          <th>#</th>
+          <th width="60px">Nummer</th>
+          <th width="30px">#</th>
         </tr>
       </thead>
       <tbody>
@@ -37,15 +38,17 @@
       </tbody>
     </table>
   </div>
+  </div>
+  <div class="clear"></div>
   <p><b>Lottorader som förekommit mer än en gång</b></p>
   <div v-if="dataRows">
     <div v-if="dataRows.length7.length">
       <table>
         <thead>
-          <tr><th>Kombination</th><th>#</th></tr>
+          <tr><th width="180px">Kombination</th><th width="30px">#</th></tr>
         </thead>
         <tbody>
-          <tr v-for="combo in dataRows.length7" :key=combo><td>{{ combo.numbers }}</td><td>{{ combo.frequency }}</td></tr>
+          <tr v-for="combo in dataRows.length7" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
         </tbody>
       </table>
     </div>
@@ -56,10 +59,10 @@
     <div>
       <table>
         <thead>
-          <tr><th>Kombination</th><th>#</th></tr>
+          <tr><th width="160px">Kombination</th><th width="30px">#</th></tr>
         </thead>
         <tbody>
-          <tr v-for="combo in dataRows.length6" :key=combo><td>{{ combo.numbers }}</td><td>{{ combo.frequency }}</td></tr>
+          <tr v-for="combo in dataRows.length6" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
         </tbody>
       </table>
     </div>
@@ -67,10 +70,10 @@
     <div>
       <table>
         <thead>
-          <tr><th>Kombination</th><th>#</th></tr>
+          <tr><th width="140px">Kombination</th><th width="30px">#</th></tr>
         </thead>
         <tbody>
-          <tr v-for="combo in dataRows.length5" :key=combo><td>{{ combo.numbers }}</td><td>{{ combo.frequency }}</td></tr>
+          <tr v-for="combo in dataRows.length5" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
         </tbody>
       </table>
     </div>
@@ -78,10 +81,10 @@
     <div>
       <table>
         <thead>
-          <tr><th>Kombination</th><th>#</th></tr>
+          <tr><th width="120px">Kombination</th><th width="30px">#</th></tr>
         </thead>
         <tbody>
-          <tr v-for="combo in dataRows.length4" :key=combo><td>{{ combo.numbers }}</td><td>{{ combo.frequency }}</td></tr>
+          <tr v-for="combo in dataRows.length4" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
         </tbody>
       </table>
     </div>
@@ -89,10 +92,10 @@
     <div>
       <table>
         <thead>
-          <tr><th>Kombination</th><th>#</th></tr>
+          <tr><th width="100px">Kombination</th><th width="30px">#</th></tr>
         </thead>
         <tbody>
-          <tr v-for="combo in dataRows.length3" :key=combo><td>{{ combo.numbers }}</td><td>{{ combo.frequency }}</td></tr>
+          <tr v-for="combo in dataRows.length3" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
         </tbody>
       </table>
     </div>

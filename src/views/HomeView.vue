@@ -5,12 +5,20 @@
   <p><b>Senaste raden</b></p>
   <div v-if="data">
     <table>
+      <thead>
+        <tr>
+          <th width="100px">Datum</th>
+          <th width="60px">Omgång</th>
+          <th width="180px">Lottorad</th>
+          <th width="60px">Tilläggsnummer</th>
+        </tr>
+      </thead>
       <tbody>
         <tr>
           <td>{{ data.lastRow.date }}</td>
           <td>{{ data.lastRow.round }}</td>
-          <td>{{ data.lastRow.numbers }}</td>
-          <td>{{ data.lastRow.extra }}</td>
+          <td>{{ data.lastRow.numbers.toString() }}</td>
+          <td>{{ data.lastRow.extra.  toString() }}</td>
         </tr>
       </tbody>
     </table>

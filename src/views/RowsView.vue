@@ -5,20 +5,21 @@
         <option v-for="year in years" :key=year :value="year">{{year}}</option>
     </select>
   </form>
+  <p></p>
   <div v-if="data">
     <table>
       <thead>
         <tr>
-          <th>Omgång</th>
-          <th>Lottorad</th>
-          <th>Tilläggsnummer</th>
+          <th width="60px">Omgång</th>
+          <th width="180px">Lottorad</th>
+          <th width="60px">Tilläggsnummer</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="round in data.rounds" :key=round.round>
           <td>{{round.round}}</td>
-          <td>{{round.numbers}}</td>
-          <td>{{round.extra}}</td>
+          <td>{{round.numbers.toString()}}</td>
+          <td>{{round.extra.toString()}}</td>
         </tr>
       </tbody>
     </table>

@@ -14,8 +14,10 @@
       <button type="button" @click="clickSearch">Sök</button>
     </form>
   </div>
-  <div v-if="matches.length">
-    <table v-for="match in matches" :key=match.category>
+  <p></p>
+  <div v-if="matches.length" class="container-5-columns">
+    <div v-for="match in matches" :key=match.category class="left-align">
+    <table>
       <thead>
         <tr><td>{{ match.category }} rätt</td></tr>
         <tr><td>{{ match.total }} st</td></tr>
@@ -24,6 +26,7 @@
         <tr v-for="date in match.dates" :key=date><td>{{ date }}</td></tr>
       </tbody>
   </table>
+  </div>
   </div>
 </template>
 
@@ -88,7 +91,7 @@ export default {
       // find intersection between sets
       var wins = {4:[], 5:[], 6:[], 61:[], 7:[]}
       for (const row of rows.rounds) {
-        var weekYear = row.round+'/'+row.date.substring(0, 4);
+        var weekYear = row.date.substring(0, 4)+'/'+row.round
         var rowSet = new Set(row.numbers)
         var match = rowSet.intersection(numberSet)
         if (match.size < 4) continue

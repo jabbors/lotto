@@ -86,4 +86,23 @@ table {
     margin-right: auto;
     border-collapse: collapse;
 }
+
+div.container-2-columns {
+  width: 200px;
+  margin: auto;
+}
+
+div.container-5-columns {
+  width: 500px;
+  margin: auto;
+}
+
+div.left-align {
+  width: 100px;
+  float: left;
+}
+
+div.clear {
+  clear: both;
+}
 </style>
