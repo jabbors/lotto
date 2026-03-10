@@ -80,4 +80,10 @@ export default {
   margin-bottom: 0.5rem;
   text-decoration: none;
 }
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
 </style>
