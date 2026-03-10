@@ -28,11 +28,22 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 
 export default {
   setup() {
-    const rows = [{'round': '1-1', 'year':2026, 'numbers':[1,2,3,4,5,6,7], 'extra':[8]}, {'round': '2-1', 'year':2026, 'numbers':[11,12,13,14,15,16,17], 'extra':[18]}, {'round': '3-1', 'year':2026, 'numbers':[1,2,3,4,15,16,17], 'extra':[18]}]
+    var rows = []
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/rows.json")
+        if (!response.ok) throw new Error(`Response status: ${response.status}`)
+        rows = await response.json()
+      } catch (error) {
+        console.error(error.message)
+      }
+    }
+    onBeforeMount(fetchData)
+
     const matches = ref([])
     const numberForm = ref(null)
     const numbers = ref({'input1':'', 'input2':'', 'input3':'', 'input4':'', 'input5':'', 'input6':'', 'input7':''})
@@ -76,8 +87,8 @@ export default {
 
       // find intersection between sets
       var wins = {4:[], 5:[], 6:[], 61:[], 7:[]}
-      for (const row of rows) {
-        var weekYear = row.round+'/'+row.year
+      for (const row of rows.rounds) {
+        var weekYear = row.round+'/'+row.date.substring(0, 4);
         var rowSet = new Set(row.numbers)
         var match = rowSet.intersection(numberSet)
         if (match.size < 4) continue

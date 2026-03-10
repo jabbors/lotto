@@ -5,8 +5,8 @@
         <option v-for="year in years" :key=year :value="year">{{year}}</option>
     </select>
   </form>
-  <div>
-    <p>{{ dataAllYears.year}}</p>
+  <div v-if="dataAllYears">
+    <p>Alla</p>
     <p>{{ dataAllYears.average}}</p>
     <table>
       <thead>
@@ -23,8 +23,8 @@
       </tbody>
     </table>
   </div>
-  <div>
-    <p>{{ dataYear.year}}</p>
+  <div v-if="dataYear">
+    <p>{{ yearSelected}}</p>
     <p>{{ dataYear.average}}</p>
     <table>
       <thead>
@@ -44,12 +44,33 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 
 export default {
   setup() {
-    const dataAllYears = {'year': 0, 'average': 485, 'distribution': [{'number': 16, 'frequency': 534}, {'number': 3, 'frequency': 530}, {'number': 6, 'frequency': 530}]}
-    const dataYear = {'year': 2026, 'average': 1, 'distribution': [{'number': 3, 'frequency': 2}, {'number': 4, 'frequency': 2}, {'number': 7, 'frequency': 2}]}
+    const dataAllYears = ref(null)
+    const dataYear = ref(null)
+    const fetchData = async (year = new Date().getFullYear()) => {
+      if (dataAllYears.value === null) {
+        try {
+          const response = await fetch("https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/numbers.json")
+          if (!response.ok) throw new Error(`Response status: ${response.status}`)
+          dataAllYears.value = await response.json()
+        } catch (error) {
+          console.error(error.message)
+        }
+      }
+      const url = "https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/numbers_" + year + ".json"
+      try {
+        const response = await fetch(url)
+        if (!response.ok) throw new Error(`Response status: ${response.status}`)
+        dataYear.value = await response.json()
+      } catch (error) {
+        console.error(error.message)
+      }
+    }
+    onBeforeMount(fetchData)
+
     const startYear = 2000
     const currentYear = new Date().getFullYear()
 
@@ -60,7 +81,7 @@ export default {
     )
     const yearSelected = ref(currentYear)
     const onYearChange = (event) => {
-        dataYear.value = {'year': event.target.value, 'average': 10, 'distribution': [{'number': 23, 'frequency': 15}, {'number': 39, 'frequency': 15}, {'number': 2, 'frequency':13}]}
+      fetchData(event.target.value)
     }
 
     return { dataAllYears, dataYear, years, yearSelected, onYearChange}

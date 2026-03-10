@@ -22,7 +22,7 @@
         <option v-for="year in years" :key=year :value="year">{{year}}</option>
     </select>
   </form>
-  <table>
+  <table v-if="data">
     <thead>
         <tr>
             <th>Omgång</th>
@@ -32,21 +32,42 @@
     <tbody>
         <tr v-for="round in data.rounds" :key=round.round>
             <td>{{ round.round }}</td>
-            <td>{{ round.wins }}</td>
+            <td>{{ round.winnings }}</td>
         </tr>
     </tbody>
   </table>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 
 export default {
   setup() {
+    const data = ref(null)
     const rowsOptions = ref([1,2,3,4,5,6,7,8,9,10,11,12])
     const rowsSelected = ref(6)
     const rowsGenerated = ref([])
-    const preGeneratedRows = [[1,1,1,1,1,1,1],[2,2,2,2,2,2,2],[3,3,3,3,3,3,3],[4,4,4,4,4,4,4],[5,5,5,5,5,5,5],[6,6,6,6,6,6,6],[7,7,7,7,7,7,7],[8,8,8,8,8,8,8],[9,9,9,9,9,9,9],[10,10,10,10,10,10,10],[11,11,11,11,11,11,11],[12,12,12,12,12,12,12],[13,13,13,13,13,13,13],[14,14,14,14,14,14,14],[15,15,15,15,15,15,15],[16,16,16,16,16,16,16],[17,17,17,17,17,17,17],[18,18,18,18,18,18,18],[19,19,19,19,19,19,19],[20,20,20,20,20,20,20]]
+    var preGeneratedRows = null
+    const fetchData = async (year = new Date().getFullYear()) => {
+      if (preGeneratedRows === null) {
+        try {
+          const response = await fetch("https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/generated_rows.json")
+          if (!response.ok) throw new Error(`Response status: ${response.status}`)
+          preGeneratedRows = await response.json()
+        } catch (error) {
+          console.error(error.message)
+        }
+      }
+      const url = "https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/generated_stats_" + year + ".json"
+      try {
+        const response = await fetch(url)
+        if (!response.ok) throw new Error(`Response status: ${response.status}`)
+        data.value = await response.json()
+      } catch (error) {
+        console.error(error.message)
+      }
+    }
+    onBeforeMount(fetchData)
     const clickRows = () => {
       var randomNumbers = []
       while (randomNumbers.length <= rowsSelected.value ) {
@@ -57,7 +78,6 @@ export default {
       rowsGenerated.value = []
       randomNumbers.forEach(randomNumber => rowsGenerated.value.push(preGeneratedRows[randomNumber]))
     }
-    const data = ref({'rounds': [{'round': '5-1', 'wins': [{'7':0, '6p1': 0, '6': 0, '5': 0, '4': 8, '3p1': 5}]},{'round': '4-1', 'wins': [{'7':0, '6p1': 0, '6': 0, '5': 0, '4': 10, '3p1': 5}]}]})
     const startYear = 2009
     const currentYear = new Date().getFullYear()
 
@@ -68,8 +88,7 @@ export default {
     )
     const yearSelected = ref(currentYear)
     const onYearChange = (event) => {
-        console.log(event.target.value)
-        data.value = {'year': event.target.value, 'rounds': [{'round': '52-1', 'wins': [{'7':0, '6p1': 0, '6': 0, '5': 0, '4': 7, '3p1': 9}]},{'round': '51-1', 'wins': [{'7':0, '6p1': 0, '6': 0, '5': 0, '4': 7, '3p1': 4}]}]}
+      fetchData(event.target.value)
     }
 
     return { rowsOptions, rowsSelected, rowsGenerated, clickRows, data, years, yearSelected, onYearChange}

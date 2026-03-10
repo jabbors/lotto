@@ -26,11 +26,23 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 
 export default {
   setup() {
-    const data = ref({'year': 2026, 'rounds': [{'round': 1, 'numbers': [1,2,3], 'extra': [4]},{'round': 2, 'numbers': [2,3,4], 'extra': [5]}]})
+    const data = ref(null)
+    const fetchData = async (year = new Date().getFullYear()) => {
+      const url = "https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/rows_" + year + ".json"
+      try {
+        const response = await fetch(url)
+        if (!response.ok) throw new Error(`Response status: ${response.status}`)
+        data.value = await response.json()
+      } catch (error) {
+        console.error(error.message)
+      }
+    }
+    onBeforeMount(fetchData)
+
     const startYear = 2000
     const currentYear = new Date().getFullYear()
 
@@ -41,7 +53,7 @@ export default {
     )
     const yearSelected = ref(currentYear)
     const onYearChange = (event) => {
-        data.value = {'year': event.target.value, 'rounds': [{'round': 52, 'numbers': [10,20,30], 'extra': [40]},{'round': 51, 'numbers': [10,20,30], 'extra': [40]}]}
+      fetchData(event.target.value)
     }
 
     return { data, years, yearSelected, onYearChange}
