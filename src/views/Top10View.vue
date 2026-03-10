@@ -116,6 +116,7 @@ export default {
         const response = await fetch("https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/numbers.json")
         if (!response.ok) throw new Error(`Response status: ${response.status}`)
         dataAllYears.value = await response.json()
+        dataAllYears.value.distribution = dataAllYears.value.distribution.slice(0,10)
       } catch (error) {
         console.error(error.message)
       }
@@ -123,6 +124,7 @@ export default {
         const response = await fetch("https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/numbers_"+currentYear+".json")
         if (!response.ok) throw new Error(`Response status: ${response.status}`)
         dataYear.value = await response.json()
+        dataYear.value.distribution = dataYear.value.distribution.slice(0,10)
       } catch (error) {
         console.error(error.message)
       }
