@@ -73,12 +73,13 @@ export default {
     }
     onBeforeMount(fetchData)
 
-    const startYear = 1987
     const currentYear = new Date().getFullYear()
+    const startYear = currentYear
+    const endYear = 1987
 
     const years = computed(() => Array.from(
-        { length: currentYear - startYear + 1 },
-        (_, i) => startYear + i
+        { length: startYear - endYear + 1 },
+        (_, i) => startYear - i
         )
     )
     const yearSelected = ref(currentYear)

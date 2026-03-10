@@ -90,12 +90,13 @@ export default {
       rowsGenerated.value = []
       randomNumbers.forEach(randomNumber => rowsGenerated.value.push(preGeneratedRows[randomNumber]))
     }
-    const startYear = 2009
     const currentYear = new Date().getFullYear()
+    const startYear = currentYear
+    const endYear = 2009
 
     const years = computed(() => Array.from(
-        { length: currentYear - startYear + 1 },
-        (_, i) => startYear + i
+        { length: startYear - endYear + 1 },
+        (_, i) => startYear - i
         )
     )
     const yearSelected = ref(currentYear)
