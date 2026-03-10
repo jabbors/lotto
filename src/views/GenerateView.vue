@@ -82,7 +82,7 @@ export default {
     onBeforeMount(fetchData)
     const clickRows = () => {
       var randomNumbers = []
-      while (randomNumbers.length <= rowsSelected.value ) {
+      while (randomNumbers.length < rowsSelected.value ) {
         var randomNumber = Math.floor(Math.random() * preGeneratedRows.length);
         if (randomNumbers.includes(randomNumber)) continue
         randomNumbers.push(randomNumber)
