@@ -17,7 +17,7 @@
     </table>
   </div>
   <p><b>Statistik över genererade rader</b></p>
-    <p>Varje vecka genereras 1000 slumpmässiga rader. Här samlas information om hur många rätt de genererade raderna skulle ha gett per vecka.</p>
+    <p>Varje vecka genereras 1000 nya rader. Här samlas information om hur många rätt de genererade raderna skulle ha gett per vecka.</p>
   <form>
     <select v-model="yearSelected" @change="onYearChange">
         <option v-for="year in years" :key=year :value="year">{{year}}</option>
