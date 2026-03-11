@@ -1,4 +1,8 @@
-# app
+# lotto
+
+A webapp with stats from the Finnish lottery
+
+App is availble at https://jabbors.github.io/lotto/
 
 ## Project setup
 ```
