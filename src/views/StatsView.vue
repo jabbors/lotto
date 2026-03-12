@@ -9,10 +9,10 @@
       <table>
         <thead>
           <tr>
-            <td>{{ match.category }} rätt</td>
+            <th>{{ match.category }} rätt</th>
           </tr>
           <tr>
-            <td>{{ match.total }} st</td>
+            <th>{{ match.total }} st</th>
           </tr>
         </thead>
         <tbody>
@@ -30,9 +30,9 @@
   <table v-if="dataDateRowsStats">
     <thead>
       <tr>
-        <td width="80px">Beskrivning</td>
-        <td width="80px">Dragna</td>
-        <td width="60px">%</td>
+        <th width="80px">Beskrivning</th>
+        <th width="80px">Dragna</th>
+        <th width="60px">%</th>
       </tr>
     </thead>
     <tbody>
@@ -55,10 +55,10 @@
   <table v-if="dataCombinationsStats">
     <thead>
       <tr>
-        <td width="140px">Antal nummer</td>
-        <td width="80px">Unika</td>
-        <td width="80px">Dragna</td>
-        <td width="60px">%</td>
+        <th width="140px">Antal nummer</th>
+        <th width="80px">Unika</th>
+        <th width="80px">Dragna</th>
+        <th width="60px">%</th>
       </tr>
     </thead>
     <tbody>

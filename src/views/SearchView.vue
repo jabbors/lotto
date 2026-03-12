@@ -20,10 +20,10 @@
       <table>
         <thead>
           <tr>
-            <td>{{ match.category }} rätt</td>
+            <th>{{ match.category }} rätt</th>
           </tr>
           <tr>
-            <td>{{ match.total }} st</td>
+            <th>{{ match.total }} st</th>
           </tr>
         </thead>
         <tbody>
