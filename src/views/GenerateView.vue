@@ -24,7 +24,7 @@
     </select>
   </form>
   <p></p>
-  <table v-if="data">
+  <table v-if="dataGeneratedStats">
     <thead>
         <tr>
             <th width="60">Omgång</th>
@@ -37,7 +37,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr v-for="round in data.rounds" :key=round.round>
+        <tr v-for="round in dataGeneratedStats.rounds" :key=round.round>
             <td>{{ round.round }}</td>
             <td>{{ round.winnings[7] }}</td>
             <td>{{ round.winnings['6p1'] }}</td>
@@ -55,17 +55,17 @@ import { ref, computed, onBeforeMount } from 'vue'
 
 export default {
   setup() {
-    const data = ref(null)
+    const dataGeneratedStats = ref(null)
     const rowsOptions = ref([1,2,3,4,5,6,7,8,9,10,11,12])
     const rowsSelected = ref(6)
     const rowsGenerated = ref([])
-    var preGeneratedRows = null
+    var dataGeneratedRows = null
     const fetchData = async (year = new Date().getFullYear()) => {
-      if (preGeneratedRows === null) {
+      if (dataGeneratedRows === null) {
         try {
           const response = await fetch("https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/generated_rows.json")
           if (!response.ok) throw new Error(`Response status: ${response.status}`)
-          preGeneratedRows = await response.json()
+          dataGeneratedRows = await response.json()
         } catch (error) {
           console.error(error.message)
         }
@@ -74,7 +74,7 @@ export default {
       try {
         const response = await fetch(url)
         if (!response.ok) throw new Error(`Response status: ${response.status}`)
-        data.value = await response.json()
+        dataGeneratedStats.value = await response.json()
       } catch (error) {
         console.error(error.message)
       }
@@ -83,12 +83,12 @@ export default {
     const clickRows = () => {
       var randomNumbers = []
       while (randomNumbers.length < rowsSelected.value ) {
-        var randomNumber = Math.floor(Math.random() * preGeneratedRows.length);
+        var randomNumber = Math.floor(Math.random() * dataGeneratedRows.length);
         if (randomNumbers.includes(randomNumber)) continue
         randomNumbers.push(randomNumber)
       }
       rowsGenerated.value = []
-      randomNumbers.forEach(randomNumber => rowsGenerated.value.push(preGeneratedRows[randomNumber]))
+      randomNumbers.forEach(randomNumber => rowsGenerated.value.push(dataGeneratedRows[randomNumber]))
     }
     const currentYear = new Date().getFullYear()
     const startYear = currentYear
@@ -104,7 +104,7 @@ export default {
       fetchData(event.target.value)
     }
 
-    return { rowsOptions, rowsSelected, rowsGenerated, clickRows, data, years, yearSelected, onYearChange}
+    return { rowsOptions, rowsSelected, rowsGenerated, clickRows, dataGeneratedStats, years, yearSelected, onYearChange}
   }
 }
 </script>

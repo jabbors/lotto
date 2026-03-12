@@ -35,12 +35,12 @@ import { ref, onBeforeMount } from 'vue';
 
 export default {
   setup() {
-    var rows = []
+    var dataRows = []
     const fetchData = async () => {
       try {
         const response = await fetch("https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/rows.json")
         if (!response.ok) throw new Error(`Response status: ${response.status}`)
-        rows = await response.json()
+        dataRows = await response.json()
       } catch (error) {
         console.error(error.message)
       }
@@ -90,10 +90,10 @@ export default {
 
       // find intersection between sets
       var wins = {4:[], 5:[], 6:[], 61:[], 7:[]}
-      for (const row of rows.rounds) {
+      for (const row of dataRows.rounds) {
         var weekYear = row.date.substring(0, 4)+'/'+row.round
-        var rowSet = new Set(row.numbers)
-        var match = rowSet.intersection(numberSet)
+        var dataRowset = new Set(row.numbers)
+        var match = dataRowset.intersection(numberSet)
         if (match.size < 4) continue
         if (match.size == 6) {
           var extraSet = new Set(row.extra)
