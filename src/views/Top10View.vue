@@ -2,7 +2,7 @@
   <h1>Top 10</h1>
   <p><b>10 mest förekommande nummer</b></p>
   <div class="container-2-columns">
-  <div v-if="dataNumbersAll" class="left-align">
+  <div v-if="dataNumbersAll" class="column-left-align-100px">
     <p>År: Alla</p>
     <p>Medeltal: {{ dataNumbersAll.average}}</p>
     <table>
@@ -20,7 +20,7 @@
       </tbody>
     </table>
   </div>
-  <div v-if="dataNumbersYear" class="left-align">
+  <div v-if="dataNumbersYear" class="column-left-align-100px">
     <p>År: {{ currentYear }}</p>
     <p>Medeltal: {{ dataNumbersYear.average}}</p>
     <table>

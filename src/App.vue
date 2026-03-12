@@ -100,7 +100,7 @@ div.column-left-align-80px {
   float: left;
 }
 
-div.left-align {
+div.column-left-align-100px {
   width: 100px;
   float: left;
 }

@@ -6,7 +6,7 @@
     </select>
   </form>
   <div class="container-2-columns">
-  <div v-if="dataNumbersAll" class="left-align">
+  <div v-if="dataNumbersAll" class="column-left-align-100px">
     <p>År: Alla</p>
     <p>Medeltal: {{ dataNumbersAll.average}}</p>
     <table>
@@ -24,7 +24,7 @@
       </tbody>
     </table>
   </div>
-  <div v-if="dataNumbers" class="left-align">
+  <div v-if="dataNumbers" class="column-left-align-100px">
     <p>År: {{ yearSelected}}</p>
     <p>Medeltal: {{ dataNumbers.average}}</p>
     <table>
