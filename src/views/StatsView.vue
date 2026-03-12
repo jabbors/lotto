@@ -81,18 +81,17 @@ export default {
     const matches = ref([])
     const dataDateRowsStats = ref(null)
     const dataCombinationsStats = ref(null)
-    const matchNumbers = () => {
-      var topSevenNumberSet = new Set(dataTopSevenNumbers.value)
+    const matchNumbers = (numberSet) => {
       // find intersection between sets
       var wins = {4:[], 5:[], 6:[], 61:[], 7:[]}
       for (const row of dataRows.rounds) {
         var weekYear = row.date.substring(0, 4)+'/'+row.round
         var dataRowset = new Set(row.numbers)
-        var match = dataRowset.intersection(topSevenNumberSet)
+        var match = dataRowset.intersection(numberSet)
         if (match.size < 4) continue
         if (match.size == 6) {
           var extraSet = new Set(row.extra)
-          var matchExtra = extraSet.intersection(topSevenNumberSet)
+          var matchExtra = extraSet.intersection(numberSet)
           if (matchExtra.size > 0) {
             wins[61].push(weekYear)
           } else {
@@ -125,7 +124,8 @@ export default {
             topSevenNumbersUnsorted.push(data.distribution[i].number)
         }
         dataTopSevenNumbers.value = topSevenNumbersUnsorted.sort(function(a, b) {return a - b})
-        matchNumbers()
+        var numberSet = new Set(dataTopSevenNumbers.value)
+        matchNumbers(numberSet)
       } catch (error) {
         console.error(error.message)
       }

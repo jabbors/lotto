@@ -54,7 +54,18 @@ export default {
 
     const clickSearch = () => {
       matches.value = []
-      matchNumbers()
+      if (!validNumberForm()) {
+        formInputWarning.value = "ange siffror mellan 1 och 40"
+        return
+      }
+      var numberSet = new Set([numbers.value.input1, numbers.value.input2, numbers.value.input3, numbers.value.input4, numbers.value.input5, numbers.value.input6, numbers.value.input7])
+      if (numberSet.size != 7) {
+        formInputWarning.value = "sifforna måste vara unika"
+        return
+      }
+      formInputWarning.value = null
+      numbers.value = {'input1':'', 'input2':'', 'input3':'', 'input4':'', 'input5':'', 'input6':'', 'input7':''}
+      matchNumbers(numberSet)
     }
 
     const validNumberForm = () => {
@@ -75,19 +86,7 @@ export default {
       return true
     }
 
-    const matchNumbers = () => {
-      if (!validNumberForm()) {
-        formInputWarning.value = "ange siffror mellan 1 och 40"
-        return
-      }
-      var numberSet = new Set([numbers.value.input1, numbers.value.input2, numbers.value.input3, numbers.value.input4, numbers.value.input5, numbers.value.input6, numbers.value.input7])
-      if (numberSet.size != 7) {
-        formInputWarning.value = "sifforna måste vara unika"
-        return
-      }
-      formInputWarning.value = null
-      numbers.value = {'input1':'', 'input2':'', 'input3':'', 'input4':'', 'input5':'', 'input6':'', 'input7':''}
-
+    const matchNumbers = (numberSet) => {
       // find intersection between sets
       var wins = {4:[], 5:[], 6:[], 61:[], 7:[]}
       for (const row of dataRows.rounds) {
