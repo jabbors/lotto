@@ -2,46 +2,46 @@
   <h1>Nummerfördelning</h1>
   <form>
     <select v-model="yearSelected" @change="onYearChange">
-        <option v-for="year in years" :key=year :value="year">{{year}}</option>
+      <option v-for="year in years" :key=year :value="year">{{ year }}</option>
     </select>
   </form>
   <div class="container-2-columns">
-  <div v-if="dataNumbersAll" class="column-left-align-100px">
-    <p>År: Alla</p>
-    <p>Medeltal: {{ dataNumbersAll.average}}</p>
-    <table>
-      <thead>
-        <tr>
-          <th width="60px">Nummer</th>
-          <th width="30px">#</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="number in dataNumbersAll.distribution" :key=number.number>
-          <td>{{ number.number }}</td>
-          <td>{{ number.frequency }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div v-if="dataNumbers" class="column-left-align-100px">
-    <p>År: {{ yearSelected}}</p>
-    <p>Medeltal: {{ dataNumbers.average}}</p>
-    <table>
-      <thead>
-        <tr>
-          <th width="60px">Nummer</th>
-          <th width="30px">#</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="number in dataNumbers.distribution" :key=number.number>
-          <td>{{ number.number }}</td>
-          <td>{{ number.frequency }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div v-if="dataNumbersAll" class="column-left-align-100px">
+      <p>År: Alla</p>
+      <p>Medeltal: {{ dataNumbersAll.average }}</p>
+      <table>
+        <thead>
+          <tr>
+            <th width="60px">Nummer</th>
+            <th width="30px">#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="number in dataNumbersAll.distribution" :key=number.number>
+            <td>{{ number.number }}</td>
+            <td>{{ number.frequency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div v-if="dataNumbers" class="column-left-align-100px">
+      <p>År: {{ yearSelected }}</p>
+      <p>Medeltal: {{ dataNumbers.average }}</p>
+      <table>
+        <thead>
+          <tr>
+            <th width="60px">Nummer</th>
+            <th width="30px">#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="number in dataNumbers.distribution" :key=number.number>
+            <td>{{ number.number }}</td>
+            <td>{{ number.frequency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -78,16 +78,16 @@ export default {
     const endYear = 1987
 
     const years = computed(() => Array.from(
-        { length: startYear - endYear + 1 },
-        (_, i) => startYear - i
-        )
+      { length: startYear - endYear + 1 },
+      (_, i) => startYear - i
+    )
     )
     const yearSelected = ref(currentYear)
     const onYearChange = (event) => {
       fetchData(event.target.value)
     }
 
-    return { dataNumbersAll, dataNumbers, years, yearSelected, onYearChange}
+    return { dataNumbersAll, dataNumbers, years, yearSelected, onYearChange }
   }
 }
 </script>

@@ -2,7 +2,7 @@
   <h1>Rader</h1>
   <form>
     <select v-model="yearSelected" @change="onYearChange">
-        <option v-for="year in years" :key=year :value="year">{{year}}</option>
+      <option v-for="year in years" :key=year :value="year">{{ year }}</option>
     </select>
   </form>
   <p></p>
@@ -17,9 +17,9 @@
       </thead>
       <tbody>
         <tr v-for="round in data.rounds" :key=round.round>
-          <td>{{round.round}}</td>
-          <td>{{round.numbers.toString()}}</td>
-          <td>{{round.extra.toString()}}</td>
+          <td>{{ round.round }}</td>
+          <td>{{ round.numbers.toString() }}</td>
+          <td>{{ round.extra.toString() }}</td>
         </tr>
       </tbody>
     </table>
@@ -49,16 +49,16 @@ export default {
     const endYear = 1987
 
     const years = computed(() => Array.from(
-        { length: startYear - endYear + 1 },
-        (_, i) => startYear - i
-        )
+      { length: startYear - endYear + 1 },
+      (_, i) => startYear - i
+    )
     )
     const yearSelected = ref(currentYear)
     const onYearChange = (event) => {
       fetchData(event.target.value)
     }
 
-    return { data, years, yearSelected, onYearChange}
+    return { data, years, yearSelected, onYearChange }
   }
 }
 </script>

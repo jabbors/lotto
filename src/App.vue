@@ -80,9 +80,9 @@ export default {
 }
 
 table {
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
 }
 
 div.container-2-columns {

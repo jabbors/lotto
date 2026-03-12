@@ -17,16 +17,22 @@
   <p></p>
   <div v-if="matches.length" class="container-5-columns">
     <div v-for="match in matches" :key=match.category class="column-left-align-80px">
-    <table>
-      <thead>
-        <tr><td>{{ match.category }} rätt</td></tr>
-        <tr><td>{{ match.total }} st</td></tr>
-      </thead>
-      <tbody>
-        <tr v-for="date in match.dates" :key=date><td>{{ date }}</td></tr>
-      </tbody>
-  </table>
-  </div>
+      <table>
+        <thead>
+          <tr>
+            <td>{{ match.category }} rätt</td>
+          </tr>
+          <tr>
+            <td>{{ match.total }} st</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="date in match.dates" :key=date>
+            <td>{{ date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -49,7 +55,7 @@ export default {
 
     const matches = ref([])
     const numberForm = ref(null)
-    const numbers = ref({'input1':'', 'input2':'', 'input3':'', 'input4':'', 'input5':'', 'input6':'', 'input7':''})
+    const numbers = ref({ 'input1': '', 'input2': '', 'input3': '', 'input4': '', 'input5': '', 'input6': '', 'input7': '' })
     const formInputWarning = ref(null)
 
     const clickSearch = () => {
@@ -64,7 +70,7 @@ export default {
         return
       }
       formInputWarning.value = null
-      numbers.value = {'input1':'', 'input2':'', 'input3':'', 'input4':'', 'input5':'', 'input6':'', 'input7':''}
+      numbers.value = { 'input1': '', 'input2': '', 'input3': '', 'input4': '', 'input5': '', 'input6': '', 'input7': '' }
       matchNumbers(numberSet)
     }
 
@@ -88,9 +94,9 @@ export default {
 
     const matchNumbers = (numberSet) => {
       // find intersection between sets
-      var wins = {4:[], 5:[], 6:[], 61:[], 7:[]}
+      var wins = { 4: [], 5: [], 6: [], 61: [], 7: [] }
       for (const row of dataRows.rounds) {
-        var weekYear = row.date.substring(0, 4)+'/'+row.round
+        var weekYear = row.date.substring(0, 4) + '/' + row.round
         var dataRowset = new Set(row.numbers)
         var match = dataRowset.intersection(numberSet)
         if (match.size < 4) continue
@@ -106,11 +112,11 @@ export default {
           wins[match.size].push(weekYear)
         }
       }
-      matches.value.push({'category': '4', 'total': wins[4].length, 'dates': wins[4]})
-      matches.value.push({'category': '5', 'total': wins[5].length, 'dates': wins[5]})
-      matches.value.push({'category': '6', 'total': wins[6].length, 'dates': wins[6]})
-      matches.value.push({'category': '6+1', 'total': wins[61].length, 'dates': wins[61]})
-      matches.value.push({'category': '7', 'total': wins[7].length, 'dates': wins[7]})
+      matches.value.push({ 'category': '4', 'total': wins[4].length, 'dates': wins[4] })
+      matches.value.push({ 'category': '5', 'total': wins[5].length, 'dates': wins[5] })
+      matches.value.push({ 'category': '6', 'total': wins[6].length, 'dates': wins[6] })
+      matches.value.push({ 'category': '6+1', 'total': wins[61].length, 'dates': wins[61] })
+      matches.value.push({ 'category': '7', 'total': wins[7].length, 'dates': wins[7] })
     }
 
     return { matches, numberForm, numbers, formInputWarning, clickSearch }
