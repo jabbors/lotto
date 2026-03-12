@@ -40,64 +40,22 @@
   </div>
   </div>
   <div class="clear"></div>
-  <p><b>Lottorader som förekommit mer än en gång</b></p>
   <div v-if="dataCombinations">
-    <div v-if="dataCombinations.length7.length">
-      <table>
-        <thead>
-          <tr><th width="180px">Kombination</th><th width="30px">#</th></tr>
-        </thead>
-        <tbody>
-          <tr v-for="combo in dataCombinations.length7" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div v-else>
-      Inga rader
-    </div>
-    <p><b>10 mest förekommande kombinationerna av 6 siffror</b></p>
-    <div>
-      <table>
-        <thead>
-          <tr><th width="160px">Kombination</th><th width="30px">#</th></tr>
-        </thead>
-        <tbody>
-          <tr v-for="combo in dataCombinations.length6" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p><b>10 mest förekommande kombinationerna av 5 siffror</b></p>
-    <div>
-      <table>
-        <thead>
-          <tr><th width="140px">Kombination</th><th width="30px">#</th></tr>
-        </thead>
-        <tbody>
-          <tr v-for="combo in dataCombinations.length5" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p><b>10 mest förekommande kombinationerna av 4 siffror</b></p>
-    <div>
-      <table>
-        <thead>
-          <tr><th width="120px">Kombination</th><th width="30px">#</th></tr>
-        </thead>
-        <tbody>
-          <tr v-for="combo in dataCombinations.length4" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p><b>10 mest förekommande kombinationerna av 3 siffror</b></p>
-    <div>
-      <table>
-        <thead>
-          <tr><th width="100px">Kombination</th><th width="30px">#</th></tr>
-        </thead>
-        <tbody>
-          <tr v-for="combo in dataCombinations.length3" :key=combo><td>{{ combo.numbers.toString() }}</td><td>{{ combo.frequency }}</td></tr>
-        </tbody>
-      </table>
+    <div v-for="combinations in dataCombinations" :key="combinations">
+      <p><b>10 mest förekommande kombinationerna av {{ combinations.length }} siffror</b></p>
+      <div v-if="combinations.combinations.length">
+        <table>
+          <thead>
+            <tr><th width="180px">Kombination</th><th width="30px">#</th></tr>
+          </thead>
+          <tbody>
+            <tr v-for="combination in combinations.combinations" :key=combination><td>{{ combination.numbers.toString() }}</td><td>{{ combination.frequency }}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-else>
+        Inga rader
+      </div>
     </div>
   </div>
 </template>
