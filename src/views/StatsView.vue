@@ -4,7 +4,7 @@
   <p><b>Vinster</b></p>
   <p>Om man alltid hade lagt en rad me de sju mest förekommande nummren (dvs <span v-if="dataTopSevenNumbers">{{ dataTopSevenNumbers.toString() }}</span>) skulle man genom tiderna ha haft:</p>
   <div v-if="matches.length" class="container-5-columns">
-    <div v-for="match in matches" :key=match.category class="left-align">
+    <div v-for="match in matches" :key=match.category class="column-left-align-80px">
     <table>
       <thead>
         <tr><td>{{ match.category }} rätt</td></tr>

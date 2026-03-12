@@ -91,8 +91,13 @@ div.container-2-columns {
 }
 
 div.container-5-columns {
-  width: 500px;
+  width: 400px;
   margin: auto;
+}
+
+div.column-left-align-80px {
+  width: 80px;
+  float: left;
 }
 
 div.left-align {

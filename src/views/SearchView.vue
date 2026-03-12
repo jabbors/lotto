@@ -16,7 +16,7 @@
   </div>
   <p></p>
   <div v-if="matches.length" class="container-5-columns">
-    <div v-for="match in matches" :key=match.category class="left-align">
+    <div v-for="match in matches" :key=match.category class="column-left-align-80px">
     <table>
       <thead>
         <tr><td>{{ match.category }} rätt</td></tr>
