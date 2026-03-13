@@ -10,11 +10,6 @@ import GenerateView from '@/views/GenerateView.vue'
 
 const routes = [
     {
-        path: '',
-        name: 'Home',
-        component: HomeView
-    },
-    {
         path: '/',
         name: 'Home',
         component: HomeView
