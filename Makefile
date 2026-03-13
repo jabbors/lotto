@@ -1,4 +1,4 @@
 .PHONY: build
 build:
-	sed -i "s#publicPath: '/'#publicPath: ''#g" vue.config.js
+	sed -i "s#publicPath: '/'#publicPath: '/lotto/'#g" vue.config.js
 	yarn build
