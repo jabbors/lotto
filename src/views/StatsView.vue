@@ -27,7 +27,7 @@
   <p><b>Datumrader</b></p>
   <p>I tabellen nedan har jag listat hur många av de dragna raderna som bara innehåller nummror mindre än eller lika med
     31 samt hur många rader som innehåller minst ett nummer större än 31.</p>
-  <table v-if="dataDateRowsStats">
+  <table v-if="dataRowsStats">
     <thead>
       <tr>
         <th width="80px">Beskrivning</th>
@@ -38,13 +38,42 @@
     <tbody>
       <tr>
         <td>&lt;= 31</td>
-        <td>{{ dataDateRowsStats.lessThanEqual.total }}</td>
-        <td>{{ dataDateRowsStats.lessThanEqual.percentage }}</td>
+        <td>{{ dataRowsStats.lessThanEqual.total }}</td>
+        <td>{{ dataRowsStats.lessThanEqual.percentage }}</td>
       </tr>
       <tr>
         <td>&gt; 31</td>
-        <td>{{ dataDateRowsStats.greaterThan.total }}</td>
-        <td>{{ dataDateRowsStats.greaterThan.percentage }}</td>
+        <td>{{ dataRowsStats.greaterThan.total }}</td>
+        <td>{{ dataRowsStats.greaterThan.percentage }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><b>Paritetsrader</b></p>
+  <p>I tabellen nedan har jag listat hur många av de dragna raderna som bara innehåller jämna nummer, udda nummer samt
+    blandade nummer.</p>
+  <table v-if="dataRowsStats">
+    <thead>
+      <tr>
+        <th width="80px">Beskrivning</th>
+        <th width="80px">Dragna</th>
+        <th width="60px">%</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Jämna</td>
+        <td>{{ dataRowsStats.evenNumbers.total }}</td>
+        <td>{{ dataRowsStats.evenNumbers.percentage }}</td>
+      </tr>
+      <tr>
+        <td>Udda</td>
+        <td>{{ dataRowsStats.oddNumbers.total }}</td>
+        <td>{{ dataRowsStats.oddNumbers.percentage }}</td>
+      </tr>
+      <tr>
+        <td>Blandade</td>
+        <td>{{ dataRowsStats.mixedNumbers.total }}</td>
+        <td>{{ dataRowsStats.mixedNumbers.percentage }}</td>
       </tr>
     </tbody>
   </table>
@@ -107,7 +136,7 @@ export default {
     var dataRows = []
     const dataTopSevenNumbers = ref(null)
     const matches = ref([])
-    const dataDateRowsStats = ref(null)
+    const dataRowsStats = ref(null)
     const dataCombinationsStats = ref(null)
     const matchNumbers = (numberSet) => {
       // find intersection between sets
@@ -158,9 +187,9 @@ export default {
         console.error(error.message)
       }
       try {
-        const response = await fetch("https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/daterows_stats.json")
+        const response = await fetch("https://raw.githubusercontent.com/jabbors/lotto-data/refs/heads/master/data/rows_stats.json")
         if (!response.ok) throw new Error(`Response status: ${response.status}`)
-        dataDateRowsStats.value = await response.json()
+        dataRowsStats.value = await response.json()
       } catch (error) {
         console.error(error.message)
       }
@@ -174,7 +203,7 @@ export default {
     }
     onBeforeMount(fetchData)
 
-    return { dataTopSevenNumbers, matches, dataDateRowsStats, dataCombinationsStats }
+    return { dataTopSevenNumbers, matches, dataRowsStats, dataCombinationsStats }
   }
 }
 </script>
